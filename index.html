@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>글자 수 세기</title>
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --border: #E0DDD6;
+    --text-primary: #1A1814;
+    --text-secondary: #6B6660;
+    --text-muted: #A8A49E;
+    --accent: #3D6B5E;
+    --accent-light: #EBF2EF;
+    --accent-mid: #5A9A8A;
+    --tag-bg: #F0EDE8;
+    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 16px 64px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .title {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 680px;
+    padding: 28px 28px 24px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 240px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 15px;
+    line-height: 1.7;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--bg);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  textarea:focus { border-color: var(--accent-mid); }
+  textarea::placeholder { color: var(--text-muted); }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .stat-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    position: relative;
+    transition: background 0.15s;
+  }
+
+  .stat-box.highlight {
+    background: var(--accent-light);
+    border-color: #B8D6CE;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -1.5px;
+    line-height: 1;
+  }
+
+  .stat-box.highlight .stat-value { color: var(--accent); }
+
+  .stat-unit {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-left: 4px;
+  }
+
+  .stat-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  .extra-stats {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .mini-stat {
+    background: var(--tag-bg);
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+
+  .mini-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .mini-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: -0.5px;
+  }
+
+  .clear-btn {
+    margin-top: 18px;
+    width: 100%;
+    padding: 11px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, color 0.15s;
+    letter-spacing: 0.02em;
+  }
+
+  .clear-btn:hover {
+    background: var(--tag-bg);
+    color: var(--text-primary);
+  }
+
+  footer {
+    margin-top: 28px;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title">글자 수 세기</div>
+  <div class="subtitle">텍스트를 붙여넣으면 자동으로 카운트</div>
+</header>
+
+<div class="card">
+  <textarea id="inputText" placeholder="여기에 텍스트를 붙여넣으세요…" oninput="countChars()"></textarea>
+
+  <div class="stats-grid">
+    <div class="stat-box highlight">
+      <div class="stat-label">공백 포함</div>
+      <div class="stat-value" id="withSpace">0<span class="stat-unit">자</span></div>
+      <div class="stat-desc">모든 글자·공백·줄바꿈 포함</div>
+    </div>
+    <div class="stat-box highlight">
+      <div class="stat-label">공백 제외</div>
+      <div class="stat-value" id="withoutSpace">0<span class="stat-unit">자</span></div>
+      <div class="stat-desc">공백·탭·줄바꿈 모두 제거</div>
+    </div>
+  </div>
+
+  <div class="extra-stats">
+    <div class="mini-stat">
+      <div class="mini-label">줄 수</div>
+      <div class="mini-value" id="lineCount">0</div>
+    </div>
+    <div class="mini-stat">
+      <div class="mini-label">단어 수</div>
+      <div class="mini-value" id="wordCount">0</div>
+    </div>
+    <div class="mini-stat">
+      <div class="mini-label">문장 수</div>
+      <div class="mini-value" id="sentenceCount">0</div>
+    </div>
+  </div>
+
+  <button class="clear-btn" onclick="clearText()">초기화</button>
+</div>
+
+<footer>실시간 카운트 · 서버 전송 없음</footer>
+
+<script>
+  function countChars() {
+    const text = document.getElementById('inputText').value;
+    const withSpace = text.length;
+    const withoutSpace = text.replace(/\s/g, '').length;
+    const lines = text === '' ? 0 : text.split('\n').length;
+    const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+    const sentences = text.trim() === '' ? 0 : (text.match(/[.!?。！？]+/g) || []).length;
+
+    setVal('withSpace', withSpace, '자');
+    setVal('withoutSpace', withoutSpace, '자');
+    document.getElementById('lineCount').textContent = lines.toLocaleString();
+    document.getElementById('wordCount').textContent = words.toLocaleString();
+    document.getElementById('sentenceCount').textContent = sentences.toLocaleString();
+  }
+
+  function setVal(id, num, unit) {
+    document.getElementById(id).innerHTML = num.toLocaleString() + '<span class="stat-unit">' + unit + '</span>';
+  }
+
+  function clearText() {
+    document.getElementById('inputText').value = '';
+    countChars();
+  }
+</script>
+
+</body>
+</html>
