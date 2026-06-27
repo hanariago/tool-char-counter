@@ -15,4 +15,4 @@
 - 서버 전송 없음 (브라우저에서만 동작)
 
 ---
-Made by [Lena](https://x.com/{X핸들}) · License: MIT
+Made by [Lena](https://x.com/thezenvoid) · License: MIT
