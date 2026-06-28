@@ -1,0 +1,31 @@
+# 글자 수 세기 (tool-char-counter)
+# 모든 검색엔진 크롤러 허용
+User-agent: *
+Allow: /
+
+# AI 검색/LLM 크롤러 명시적 허용 (AEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://hanariago.github.io/tool-char-counter/sitemap.xml

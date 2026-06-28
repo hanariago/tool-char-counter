@@ -3,7 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>글자 수 세기</title>
+
+<!-- Primary SEO -->
+<title>글자수 세기 - 무료 온라인 글자 수 카운터</title>
+<meta name="description" content="한국어 글자수 세기 무료 온라인 툴. 공백 포함/제외 글자 수, 단어·문장·줄 수, 바이트(UTF-8) 계산까지 실시간으로. 설치·로그인 없이 브라우저에서 바로.">
+<meta name="keywords" content="글자수 세기, 글자 수 카운터, 공백 포함, 공백 제외, 단어 수, 바이트 계산, character counter, word counter, letter count, 文字数カウント, 字数统计">
+<meta name="author" content="Lena">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#3D6B5E">
+<link rel="canonical" href="https://hanariago.github.io/tool-char-counter/">
+
+<!-- hreflang (언어별 진입) -->
+<link rel="alternate" hreflang="ko" href="https://hanariago.github.io/tool-char-counter/?lang=ko">
+<link rel="alternate" hreflang="en" href="https://hanariago.github.io/tool-char-counter/?lang=en">
+<link rel="alternate" hreflang="ja" href="https://hanariago.github.io/tool-char-counter/?lang=ja">
+<link rel="alternate" hreflang="zh" href="https://hanariago.github.io/tool-char-counter/?lang=zh">
+<link rel="alternate" hreflang="es" href="https://hanariago.github.io/tool-char-counter/?lang=es">
+<link rel="alternate" hreflang="x-default" href="https://hanariago.github.io/tool-char-counter/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="글자수 세기 - 무료 온라인 글자 수 카운터">
+<meta property="og:description" content="공백 포함/제외 글자 수, 단어·문장·줄 수, 바이트(UTF-8)까지 실시간 카운트. 설치·로그인 없이 브라우저에서 바로.">
+<meta property="og:url" content="https://hanariago.github.io/tool-char-counter/">
+<meta property="og:site_name" content="글자수 세기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:locale:alternate" content="es_ES">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="글자수 세기 - 무료 온라인 글자 수 카운터">
+<meta name="twitter:description" content="공백 포함/제외 글자 수, 단어·문장·줄 수, 바이트(UTF-8)까지 실시간 카운트.">
+<meta name="twitter:creator" content="@thezenvoid">
+
+<!-- Favicon (인라인 SVG) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%233D6B5E'/%3E%3Ctext x='50' y='70' font-size='56' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E字%3C/text%3E%3C/svg%3E">
+
+<!-- 구조화 데이터 (검색엔진 + AI 검색) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "글자 수 세기 (Character Counter)",
+  "alternateName": ["글자수 세기", "Character Counter", "文字数カウント", "字数统计", "Contador de Caracteres"],
+  "url": "https://hanariago.github.io/tool-char-counter/",
+  "description": "공백 포함/제외 글자 수, 단어·문장·줄 수, UTF-8 바이트 수를 실시간으로 계산하는 무료 온라인 도구. 데이터는 서버로 전송되지 않고 브라우저에서만 처리됩니다.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "inLanguage": ["ko", "en", "ja", "zh", "es"],
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "공백 포함 글자 수",
+    "공백 제외 글자 수",
+    "단어 수 / 문장 수 / 줄 수",
+    "UTF-8 바이트 수",
+    "실시간 카운트",
+    "다국어 지원 (한국어·영어·일본어·중국어·스페인어)"
+  ],
+  "author": { "@type": "Person", "name": "Lena", "url": "https://x.com/thezenvoid" },
+  "license": "https://opensource.org/licenses/MIT"
+}
+</script>
+
 <style>
   :root {
     --bg: #F7F5F0;
@@ -31,6 +97,26 @@
     align-items: center;
     padding: 48px 16px 64px;
   }
+
+  .lang-bar {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .lang-select {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 7px 10px;
+    cursor: pointer;
+    outline: none;
+  }
+  .lang-select:focus { border-color: var(--accent-mid); }
 
   header {
     text-align: center;
@@ -136,7 +222,7 @@
   .extra-stats {
     margin-top: 14px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 10px;
   }
 
@@ -188,81 +274,213 @@
     color: var(--text-muted);
     text-align: center;
     letter-spacing: 0.03em;
+    line-height: 1.8;
   }
+
+  footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+  }
+  footer a:hover { color: var(--accent); }
 </style>
 </head>
 <body>
 
+<div class="lang-bar">
+  <select id="langSelect" class="lang-select" onchange="setLang(this.value)" aria-label="Language">
+    <option value="ko">한국어</option>
+    <option value="en">English</option>
+    <option value="ja">日本語</option>
+    <option value="zh">中文</option>
+    <option value="es">Español</option>
+  </select>
+</div>
+
 <header>
-  <div class="title">글자 수 세기</div>
-  <div class="subtitle">텍스트를 붙여넣으면 자동으로 카운트</div>
+  <h1 class="title" data-i18n="title">글자 수 세기</h1>
+  <div class="subtitle" data-i18n="subtitle">텍스트를 붙여넣으면 자동으로 카운트</div>
 </header>
 
-<div class="card">
-  <textarea id="inputText" placeholder="여기에 텍스트를 붙여넣으세요…" oninput="countChars()"></textarea>
+<main class="card">
+  <textarea id="inputText" data-i18n-ph="placeholder" placeholder="여기에 텍스트를 붙여넣으세요…" oninput="countChars()" aria-label="글자 수를 셀 텍스트 입력"></textarea>
 
   <div class="stats-grid">
     <div class="stat-box highlight">
-      <div class="stat-label">공백 포함</div>
-      <div class="stat-value" id="withSpace">0<span class="stat-unit">자</span></div>
-      <div class="stat-desc">모든 글자·공백·줄바꿈 포함</div>
+      <div class="stat-label" data-i18n="withSpaceLabel">공백 포함</div>
+      <div class="stat-value" id="withSpace">0<span class="stat-unit" data-unit>자</span></div>
+      <div class="stat-desc" data-i18n="withSpaceDesc">모든 글자·공백·줄바꿈 포함</div>
     </div>
     <div class="stat-box highlight">
-      <div class="stat-label">공백 제외</div>
-      <div class="stat-value" id="withoutSpace">0<span class="stat-unit">자</span></div>
-      <div class="stat-desc">공백·탭·줄바꿈 모두 제거</div>
+      <div class="stat-label" data-i18n="withoutSpaceLabel">공백 제외</div>
+      <div class="stat-value" id="withoutSpace">0<span class="stat-unit" data-unit>자</span></div>
+      <div class="stat-desc" data-i18n="withoutSpaceDesc">공백·탭·줄바꿈 모두 제거</div>
     </div>
   </div>
 
   <div class="extra-stats">
     <div class="mini-stat">
-      <div class="mini-label">줄 수</div>
+      <div class="mini-label" data-i18n="lineLabel">줄 수</div>
       <div class="mini-value" id="lineCount">0</div>
     </div>
     <div class="mini-stat">
-      <div class="mini-label">단어 수</div>
+      <div class="mini-label" data-i18n="wordLabel">단어 수</div>
       <div class="mini-value" id="wordCount">0</div>
     </div>
     <div class="mini-stat">
-      <div class="mini-label">문장 수</div>
+      <div class="mini-label" data-i18n="sentenceLabel">문장 수</div>
       <div class="mini-value" id="sentenceCount">0</div>
+    </div>
+    <div class="mini-stat">
+      <div class="mini-label" data-i18n="byteLabel">바이트 (UTF-8)</div>
+      <div class="mini-value" id="byteCount">0</div>
     </div>
   </div>
 
-  <button class="clear-btn" onclick="clearText()">초기화</button>
-</div>
+  <button class="clear-btn" onclick="clearText()" data-i18n="clearBtn">초기화</button>
+</main>
 
-<footer>실시간 카운트 · 서버 전송 없음</footer>
+<footer>
+  <div data-i18n="footer">실시간 카운트 · 서버 전송 없음</div>
+  <div>
+    <span data-i18n="license">오픈소스 · MIT 라이선스</span> ·
+    <a href="https://github.com/hanariago/tool-char-counter" target="_blank" rel="noopener">GitHub</a> ·
+    Made by <a href="https://x.com/thezenvoid" target="_blank" rel="noopener">Lena</a>
+  </div>
+</footer>
 
 <script>
-  // 이모지 등 서로게이트 쌍을 1자로 세기 위해 코드포인트 단위로 길이 측정
-  function charLen(s) {
-    return [...s].length;
+  // ── 다국어 사전 ──────────────────────────────
+  const I18N = {
+    ko: {
+      metaTitle: "글자수 세기 - 무료 온라인 글자 수 카운터",
+      title: "글자 수 세기",
+      subtitle: "텍스트를 붙여넣으면 자동으로 카운트",
+      placeholder: "여기에 텍스트를 붙여넣으세요…",
+      withSpaceLabel: "공백 포함", withSpaceDesc: "모든 글자·공백·줄바꿈 포함",
+      withoutSpaceLabel: "공백 제외", withoutSpaceDesc: "공백·탭·줄바꿈 모두 제거",
+      lineLabel: "줄 수", wordLabel: "단어 수", sentenceLabel: "문장 수", byteLabel: "바이트 (UTF-8)",
+      unit: "자", clearBtn: "초기화",
+      footer: "실시간 카운트 · 서버 전송 없음", license: "오픈소스 · MIT 라이선스"
+    },
+    en: {
+      metaTitle: "Character Counter - Free Online Letter & Word Count Tool",
+      title: "Character Counter",
+      subtitle: "Paste your text to count automatically",
+      placeholder: "Paste your text here…",
+      withSpaceLabel: "With spaces", withSpaceDesc: "All characters, spaces & line breaks",
+      withoutSpaceLabel: "Without spaces", withoutSpaceDesc: "Spaces, tabs & line breaks removed",
+      lineLabel: "Lines", wordLabel: "Words", sentenceLabel: "Sentences", byteLabel: "Bytes (UTF-8)",
+      unit: "chars", clearBtn: "Clear",
+      footer: "Real-time counting · No data sent to any server", license: "Open source · MIT License"
+    },
+    ja: {
+      metaTitle: "文字数カウント - 無料オンライン文字数カウンター",
+      title: "文字数カウント",
+      subtitle: "テキストを貼り付けると自動でカウント",
+      placeholder: "ここにテキストを貼り付けてください…",
+      withSpaceLabel: "スペース含む", withSpaceDesc: "すべての文字・スペース・改行を含む",
+      withoutSpaceLabel: "スペース除く", withoutSpaceDesc: "スペース・タブ・改行をすべて除去",
+      lineLabel: "行数", wordLabel: "単語数", sentenceLabel: "文の数", byteLabel: "バイト (UTF-8)",
+      unit: "文字", clearBtn: "クリア",
+      footer: "リアルタイムカウント · サーバー送信なし", license: "オープンソース · MITライセンス"
+    },
+    zh: {
+      metaTitle: "字数统计 - 免费在线字符计数工具",
+      title: "字数统计",
+      subtitle: "粘贴文本即可自动统计",
+      placeholder: "在此粘贴文本…",
+      withSpaceLabel: "含空格", withSpaceDesc: "包含所有字符、空格和换行",
+      withoutSpaceLabel: "不含空格", withoutSpaceDesc: "去除空格、制表符和换行",
+      lineLabel: "行数", wordLabel: "单词数", sentenceLabel: "句子数", byteLabel: "字节 (UTF-8)",
+      unit: "字", clearBtn: "清除",
+      footer: "实时统计 · 不向服务器发送数据", license: "开源 · MIT 许可证"
+    },
+    es: {
+      metaTitle: "Contador de Caracteres - Herramienta Gratis en Línea",
+      title: "Contador de Caracteres",
+      subtitle: "Pega tu texto para contar automáticamente",
+      placeholder: "Pega tu texto aquí…",
+      withSpaceLabel: "Con espacios", withSpaceDesc: "Todos los caracteres, espacios y saltos de línea",
+      withoutSpaceLabel: "Sin espacios", withoutSpaceDesc: "Sin espacios, tabulaciones ni saltos de línea",
+      lineLabel: "Líneas", wordLabel: "Palabras", sentenceLabel: "Frases", byteLabel: "Bytes (UTF-8)",
+      unit: "car.", clearBtn: "Borrar",
+      footer: "Conteo en tiempo real · Sin envío de datos al servidor", license: "Código abierto · Licencia MIT"
+    }
+  };
+
+  const LOCALE = { ko: "ko_KR", en: "en_US", ja: "ja_JP", zh: "zh_CN", es: "es_ES" };
+  let currentLang = "ko";
+
+  // ── 언어 적용 ──────────────────────────────
+  function setLang(lang) {
+    if (!I18N[lang]) lang = "en";
+    currentLang = lang;
+    const t = I18N[lang];
+
+    document.documentElement.lang = lang;
+    document.title = t.metaTitle;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key]) el.textContent = t[key];
+    });
+    const ta = document.querySelector('[data-i18n-ph]');
+    if (ta) ta.placeholder = t[ta.getAttribute('data-i18n-ph')];
+
+    const ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.setAttribute('content', LOCALE[lang]);
+
+    const sel = document.getElementById('langSelect');
+    if (sel) sel.value = lang;
+
+    try { localStorage.setItem('ccLang', lang); } catch (e) {}
+
+    countChars(); // 단위 텍스트 갱신
   }
+
+  // ── 카운트 ──────────────────────────────
+  // 이모지 등 서로게이트 쌍을 1자로 세기 위해 코드포인트 단위로 길이 측정
+  function charLen(s) { return [...s].length; }
 
   function countChars() {
     const text = document.getElementById('inputText').value;
+    const unit = I18N[currentLang].unit;
+
     const withSpace = charLen(text);
     const withoutSpace = charLen(text.replace(/\s/g, ''));
     const lines = text === '' ? 0 : text.split('\n').length;
     const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
     const sentences = text.trim() === '' ? 0 : (text.match(/[.!?。！？]+/g) || []).length;
+    const bytes = new TextEncoder().encode(text).length;
 
-    setVal('withSpace', withSpace, '자');
-    setVal('withoutSpace', withoutSpace, '자');
+    setVal('withSpace', withSpace, unit);
+    setVal('withoutSpace', withoutSpace, unit);
     document.getElementById('lineCount').textContent = lines.toLocaleString();
     document.getElementById('wordCount').textContent = words.toLocaleString();
     document.getElementById('sentenceCount').textContent = sentences.toLocaleString();
+    document.getElementById('byteCount').textContent = bytes.toLocaleString();
   }
 
   function setVal(id, num, unit) {
-    document.getElementById(id).innerHTML = num.toLocaleString() + '<span class="stat-unit">' + unit + '</span>';
+    document.getElementById(id).innerHTML =
+      num.toLocaleString() + '<span class="stat-unit">' + unit + '</span>';
   }
 
   function clearText() {
     document.getElementById('inputText').value = '';
     countChars();
   }
+
+  // ── 초기 언어 결정: ?lang= → localStorage → 브라우저 → ko ──
+  (function initLang() {
+    const param = new URLSearchParams(location.search).get('lang');
+    let saved = null;
+    try { saved = localStorage.getItem('ccLang'); } catch (e) {}
+    const nav = (navigator.language || 'ko').slice(0, 2).toLowerCase();
+    const pick = [param, saved, nav, 'ko'].find(l => l && I18N[l]) || 'ko';
+    setLang(pick);
+  })();
 </script>
 
 </body>
