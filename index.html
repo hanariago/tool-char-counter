@@ -7,7 +7,7 @@
 <!-- Primary SEO -->
 <title>글자수 세기 - 무료 온라인 글자 수 카운터</title>
 <meta name="description" content="한국어 글자수 세기 무료 온라인 툴. 공백 포함/제외 글자 수, 단어·문장·줄 수, 바이트(UTF-8) 계산까지 실시간으로. 설치·로그인 없이 브라우저에서 바로.">
-<meta name="keywords" content="글자수 세기, 글자 수 카운터, 공백 포함, 공백 제외, 단어 수, 바이트 계산, character counter, word counter, letter count, 文字数カウント, 字数统计">
+<meta name="keywords" content="글자수 세기, 글자 수 카운터, 공백 포함, 공백 제외, 단어 수, 바이트 계산, 자기소개서 글자수, character counter, word counter, letter count, 文字数カウント, 字数统计">
 <meta name="author" content="Lena">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#3D6B5E">
@@ -42,7 +42,7 @@
 <!-- Favicon (인라인 SVG) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%233D6B5E'/%3E%3Ctext x='50' y='70' font-size='56' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E字%3C/text%3E%3C/svg%3E">
 
-<!-- 구조화 데이터 (검색엔진 + AI 검색) -->
+<!-- 구조화 데이터: 도구 정의 (검색엔진 + AI 검색) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -67,6 +67,41 @@
   ],
   "author": { "@type": "Person", "name": "Lena", "url": "https://x.com/thezenvoid" },
   "license": "https://opensource.org/licenses/MIT"
+}
+</script>
+
+<!-- 구조화 데이터: FAQ (검색 리치결과 + AI 답변 인용) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "공백 포함과 공백 제외 글자 수는 뭐가 다른가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "공백 포함은 띄어쓰기·탭·줄바꿈까지 모두 세고, 공백 제외는 그것들을 뺀 순수 글자 수입니다. 두 값을 동시에 보여주므로 어떤 기준이 필요하든 바로 확인할 수 있습니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "입력한 글이 서버로 전송되나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "아니요. 모든 계산은 브라우저 안에서만 이루어지며, 어떤 데이터도 서버로 전송되거나 저장되지 않습니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "이모지나 특수문자도 정확히 세나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "네. 글자 수를 코드포인트 단위로 계산해, 이모지처럼 두 칸을 차지하는 문자도 1자로 정확히 셉니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "바이트 수는 어떻게 계산되나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "UTF-8 인코딩 기준입니다. 보통 한글은 글자당 약 3바이트, 영문·숫자는 1바이트입니다. DB 컬럼 길이나 메시지 용량 확인에 유용합니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "무료인가요? 설치가 필요한가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "완전 무료이며 로그인이나 설치가 필요 없습니다. 브라우저에서 바로 사용하세요." }
+    }
+  ]
 }
 </script>
 
@@ -268,6 +303,68 @@
     color: var(--text-primary);
   }
 
+  /* 콘텐츠 (SEO/AEO: 보이는 설명 + FAQ) */
+  .content {
+    width: 100%;
+    max-width: 680px;
+    margin-top: 26px;
+  }
+
+  .intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+  }
+
+  .faq { margin-top: 18px; }
+
+  .faq h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+    margin: 0 0 12px 2px;
+  }
+
+  .faq details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+
+  .faq summary {
+    cursor: pointer;
+    padding: 14px 44px 14px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    list-style: none;
+    position: relative;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    position: absolute;
+    right: 18px;
+    top: 13px;
+    font-size: 16px;
+    color: var(--text-muted);
+  }
+  .faq details[open] summary::after { content: "\2212"; }
+
+  .faq .faq-a {
+    padding: 0 18px 16px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+
   footer {
     margin-top: 28px;
     font-size: 11px;
@@ -340,6 +437,14 @@
   <button class="clear-btn" onclick="clearText()" data-i18n="clearBtn">초기화</button>
 </main>
 
+<section class="content">
+  <p class="intro" id="introText"></p>
+  <div class="faq">
+    <h2 id="faqTitle">자주 묻는 질문</h2>
+    <div id="faqList"></div>
+  </div>
+</section>
+
 <footer>
   <div data-i18n="footer">실시간 카운트 · 서버 전송 없음</div>
   <div>
@@ -361,7 +466,16 @@
       withoutSpaceLabel: "공백 제외", withoutSpaceDesc: "공백·탭·줄바꿈 모두 제거",
       lineLabel: "줄 수", wordLabel: "단어 수", sentenceLabel: "문장 수", byteLabel: "바이트 (UTF-8)",
       unit: "자", clearBtn: "초기화",
-      footer: "실시간 카운트 · 서버 전송 없음", license: "오픈소스 · MIT 라이선스"
+      footer: "실시간 카운트 · 서버 전송 없음", license: "오픈소스 · MIT 라이선스",
+      intro: "글자 수 세기는 자기소개서·리포트 분량 확인, SNS 글자 제한(트위터 280자 등) 체크, 이력서 작성 등에 쓰는 무료 온라인 도구입니다. 텍스트를 붙여넣으면 공백 포함/제외 글자 수와 단어·문장·줄·바이트 수가 즉시 표시됩니다.",
+      faqTitle: "자주 묻는 질문",
+      faq: [
+        { q: "공백 포함과 공백 제외 글자 수는 뭐가 다른가요?", a: "공백 포함은 띄어쓰기·탭·줄바꿈까지 모두 세고, 공백 제외는 그것들을 뺀 순수 글자 수입니다. 두 값을 동시에 보여주므로 어떤 기준이 필요하든 바로 확인할 수 있습니다." },
+        { q: "입력한 글이 서버로 전송되나요?", a: "아니요. 모든 계산은 브라우저 안에서만 이루어지며, 어떤 데이터도 서버로 전송되거나 저장되지 않습니다." },
+        { q: "이모지나 특수문자도 정확히 세나요?", a: "네. 글자 수를 코드포인트 단위로 계산해, 이모지처럼 두 칸을 차지하는 문자도 1자로 정확히 셉니다." },
+        { q: "바이트 수는 어떻게 계산되나요?", a: "UTF-8 인코딩 기준입니다. 보통 한글은 글자당 약 3바이트, 영문·숫자는 1바이트입니다. DB 컬럼 길이나 메시지 용량 확인에 유용합니다." },
+        { q: "무료인가요? 설치가 필요한가요?", a: "완전 무료이며 로그인이나 설치가 필요 없습니다. 브라우저에서 바로 사용하세요." }
+      ]
     },
     en: {
       metaTitle: "Character Counter - Free Online Letter & Word Count Tool",
@@ -372,7 +486,16 @@
       withoutSpaceLabel: "Without spaces", withoutSpaceDesc: "Spaces, tabs & line breaks removed",
       lineLabel: "Lines", wordLabel: "Words", sentenceLabel: "Sentences", byteLabel: "Bytes (UTF-8)",
       unit: "chars", clearBtn: "Clear",
-      footer: "Real-time counting · No data sent to any server", license: "Open source · MIT License"
+      footer: "Real-time counting · No data sent to any server", license: "Open source · MIT License",
+      intro: "Character Counter is a free online tool for checking essay and report length, staying within social media limits (e.g. Twitter's 280 characters), writing résumés, and more. Paste your text to instantly see character counts (with and without spaces), plus word, sentence, line, and byte counts.",
+      faqTitle: "Frequently Asked Questions",
+      faq: [
+        { q: "What's the difference between counting with and without spaces?", a: "\"With spaces\" counts every space, tab, and line break; \"without spaces\" counts only the characters themselves. Both are shown at once, so you're covered whichever limit you need." },
+        { q: "Is my text sent to a server?", a: "No. All counting happens entirely in your browser. No data is ever sent to or stored on a server." },
+        { q: "Does it count emoji and special characters correctly?", a: "Yes. Characters are counted by Unicode code point, so an emoji that takes two code units is still counted as a single character." },
+        { q: "How are bytes calculated?", a: "Bytes are based on UTF-8 encoding. Typically Latin letters and digits are 1 byte each, while many CJK characters are about 3 bytes. Handy for database column limits or message size." },
+        { q: "Is it free? Do I need to install anything?", a: "It's completely free with no login or installation. Just use it right in your browser." }
+      ]
     },
     ja: {
       metaTitle: "文字数カウント - 無料オンライン文字数カウンター",
@@ -383,7 +506,16 @@
       withoutSpaceLabel: "スペース除く", withoutSpaceDesc: "スペース・タブ・改行をすべて除去",
       lineLabel: "行数", wordLabel: "単語数", sentenceLabel: "文の数", byteLabel: "バイト (UTF-8)",
       unit: "文字", clearBtn: "クリア",
-      footer: "リアルタイムカウント · サーバー送信なし", license: "オープンソース · MITライセンス"
+      footer: "リアルタイムカウント · サーバー送信なし", license: "オープンソース · MITライセンス",
+      intro: "文字数カウントは、エントリーシートやレポートの文字数確認、SNSの文字数制限（Twitterの280文字など）のチェック、履歴書の作成などに使える無料オンラインツールです。テキストを貼り付けると、スペースあり/なしの文字数に加え、単語数・文の数・行数・バイト数がすぐに表示されます。",
+      faqTitle: "よくある質問",
+      faq: [
+        { q: "スペースあり/なしの文字数は何が違いますか？", a: "「スペース含む」はスペース・タブ・改行をすべて数え、「スペース除く」はそれらを除いた純粋な文字数です。両方を同時に表示するので、どの基準でもすぐ確認できます。" },
+        { q: "入力した文章はサーバーに送信されますか？", a: "いいえ。すべての計算はブラウザ内だけで行われ、データがサーバーに送信・保存されることはありません。" },
+        { q: "絵文字や特殊文字も正確に数えますか？", a: "はい。文字数をコードポイント単位で計算するため、2単位を占める絵文字も1文字として正確に数えます。" },
+        { q: "バイト数はどう計算されますか？", a: "UTF-8エンコード基準です。一般に英数字は1文字1バイト、日本語など多くの文字は約3バイトです。DBのカラム長やメッセージ容量の確認に便利です。" },
+        { q: "無料ですか？インストールは必要ですか？", a: "完全無料で、ログインもインストールも不要です。ブラウザですぐにお使いいただけます。" }
+      ]
     },
     zh: {
       metaTitle: "字数统计 - 免费在线字符计数工具",
@@ -394,7 +526,16 @@
       withoutSpaceLabel: "不含空格", withoutSpaceDesc: "去除空格、制表符和换行",
       lineLabel: "行数", wordLabel: "单词数", sentenceLabel: "句子数", byteLabel: "字节 (UTF-8)",
       unit: "字", clearBtn: "清除",
-      footer: "实时统计 · 不向服务器发送数据", license: "开源 · MIT 许可证"
+      footer: "实时统计 · 不向服务器发送数据", license: "开源 · MIT 许可证",
+      intro: "字数统计是一款免费在线工具，可用于检查文章和报告字数、控制社交媒体字数限制（如 Twitter 的 280 字）、撰写简历等。粘贴文本后，立即显示含/不含空格的字符数，以及单词数、句子数、行数和字节数。",
+      faqTitle: "常见问题",
+      faq: [
+        { q: "含空格和不含空格的字符数有什么区别？", a: "“含空格”会统计所有空格、制表符和换行，“不含空格”只统计字符本身。两者同时显示，无论需要哪种标准都能立即查看。" },
+        { q: "输入的文本会被发送到服务器吗？", a: "不会。所有计算都只在你的浏览器中进行，不会向服务器发送或存储任何数据。" },
+        { q: "能正确统计表情符号和特殊字符吗？", a: "可以。字符按 Unicode 码点统计，因此占两个码元的表情符号也会被正确计为一个字符。" },
+        { q: "字节数是如何计算的？", a: "以 UTF-8 编码为准。通常英文字母和数字每个 1 字节，许多中日韩字符约为 3 字节。便于检查数据库字段长度或消息大小。" },
+        { q: "免费吗？需要安装吗？", a: "完全免费，无需登录或安装，直接在浏览器中使用即可。" }
+      ]
     },
     es: {
       metaTitle: "Contador de Caracteres - Herramienta Gratis en Línea",
@@ -405,12 +546,25 @@
       withoutSpaceLabel: "Sin espacios", withoutSpaceDesc: "Sin espacios, tabulaciones ni saltos de línea",
       lineLabel: "Líneas", wordLabel: "Palabras", sentenceLabel: "Frases", byteLabel: "Bytes (UTF-8)",
       unit: "car.", clearBtn: "Borrar",
-      footer: "Conteo en tiempo real · Sin envío de datos al servidor", license: "Código abierto · Licencia MIT"
+      footer: "Conteo en tiempo real · Sin envío de datos al servidor", license: "Código abierto · Licencia MIT",
+      intro: "El Contador de Caracteres es una herramienta gratuita en línea para comprobar la longitud de ensayos e informes, respetar los límites de redes sociales (como los 280 caracteres de Twitter), redactar currículums y más. Pega tu texto para ver al instante el número de caracteres (con y sin espacios), además de palabras, frases, líneas y bytes.",
+      faqTitle: "Preguntas frecuentes",
+      faq: [
+        { q: "¿Cuál es la diferencia entre contar con y sin espacios?", a: "«Con espacios» cuenta todos los espacios, tabulaciones y saltos de línea; «sin espacios» cuenta solo los caracteres. Se muestran ambos a la vez, así que estás cubierto sea cual sea el límite." },
+        { q: "¿Se envía mi texto a un servidor?", a: "No. Todo el conteo ocurre íntegramente en tu navegador. Ningún dato se envía ni se almacena en un servidor." },
+        { q: "¿Cuenta correctamente los emojis y caracteres especiales?", a: "Sí. Los caracteres se cuentan por punto de código Unicode, por lo que un emoji que ocupa dos unidades se cuenta como un solo carácter." },
+        { q: "¿Cómo se calculan los bytes?", a: "Se basan en la codificación UTF-8. Normalmente las letras latinas y los dígitos ocupan 1 byte, mientras que muchos caracteres CJK ocupan unos 3 bytes. Útil para límites de columnas de bases de datos o tamaño de mensajes." },
+        { q: "¿Es gratis? ¿Necesito instalar algo?", a: "Es totalmente gratis, sin registro ni instalación. Úsalo directamente en tu navegador." }
+      ]
     }
   };
 
   const LOCALE = { ko: "ko_KR", en: "en_US", ja: "ja_JP", zh: "zh_CN", es: "es_ES" };
   let currentLang = "ko";
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
 
   // ── 언어 적용 ──────────────────────────────
   function setLang(lang) {
@@ -427,6 +581,13 @@
     });
     const ta = document.querySelector('[data-i18n-ph]');
     if (ta) ta.placeholder = t[ta.getAttribute('data-i18n-ph')];
+
+    // 콘텐츠 + FAQ
+    document.getElementById('introText').textContent = t.intro;
+    document.getElementById('faqTitle').textContent = t.faqTitle;
+    document.getElementById('faqList').innerHTML = t.faq.map(item =>
+      '<details><summary>' + esc(item.q) + '</summary><div class="faq-a">' + esc(item.a) + '</div></details>'
+    ).join('');
 
     const ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute('content', LOCALE[lang]);
